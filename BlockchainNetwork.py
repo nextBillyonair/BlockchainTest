@@ -40,7 +40,7 @@ def mine():
     response = {
         'message': "New Block Forged",
         'index': block.index,
-        'data': block.transactions,
+        'transactions': block.transactions,
         'proof': block.nonce,
         'previous_hash': block.previous_hash,
     }
@@ -114,7 +114,7 @@ def register_nodes():
 
     response = {
         'message': 'New nodes have been added',
-        'total_nodes': list(blockchain.nodes),
+        'nodes': list(blockchain.nodes),
     }
     return jsonify(response), 201
 
@@ -139,7 +139,7 @@ def consensus():
 @app.route('/nodes', methods=['GET'])
 def get_nodes():
     response = {
-        'total_nodes':list(blockchain.nodes), 
+        'nodes':list(blockchain.nodes), 
         'number_of_nodes':len(list(blockchain.nodes))
     }
     return jsonify(response, 200)
