@@ -2,6 +2,7 @@ from uuid import uuid4
 import requests
 from Blockchain import Blockchain
 from flask import Flask, jsonify, request
+from time import time
 
 # Instantiate the Node
 app = Flask(__name__)
@@ -21,6 +22,7 @@ def mine():
             'sender':"0",
             'recipient':node_identifier,
             'amount':1,
+            'timestamp': time()
         }
     )
 
@@ -57,6 +59,8 @@ def new_transaction():
     # required = ['sender', 'recipient', 'amount']
     # if not all(k in values for k in required):
     #     return 'Missing values', 400
+    # Add a timestamp to the transaction
+    values['timestamp'] = time()
 
     # Create a new Transaction
     index = blockchain.new_transaction(values)
