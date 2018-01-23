@@ -82,13 +82,8 @@ class Blockchain:
         )
         while self.valid_proof(block) is False:
             nonce += 1
-            block = Block(
-                len(self.chain), 
-                t_time, 
-                transactions, 
-                previous_hash, 
-                nonce
-            )
+            block.nonce = nonce
+            block.hash = block.hash_block()
         return block
 
     def add_block(self, block):
